@@ -46,7 +46,7 @@ public class TeamController {
 	
 	//Method to update league team is in
 	@PutMapping("/league/{leagueId}/team/{teamId}")
-	public TeamModel updateTeam(@PathVariable(value = "teamId") Long teamId,
+	public TeamModel updateTeamLeague(@PathVariable(value = "teamId") Long teamId,
 			@PathVariable(value="leagueId") Long leagueId) {
 		
 		TeamModel teamModel = teamRepo.findById(teamId).get();
@@ -85,7 +85,7 @@ public class TeamController {
 	}
 
 	//Get All Teams
-	@GetMapping("/teams")
+	@GetMapping("/team")
 	public List<TeamModel> getAllTeams(){
 		return teamRepo.findAll();
 	}
