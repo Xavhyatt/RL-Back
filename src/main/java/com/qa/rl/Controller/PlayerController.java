@@ -70,11 +70,13 @@ public class PlayerController {
 			PlayerModel playerRequest) {
 		return playerRepo.findById(playerId).map(player -> {
 			player.setName(playerRequest.getName());
-			player.setSurname(player.getSurname());
-			player.setPosition(player.getPosition());
-			player.setHeight(player.getHeight());
-			player.setWeight(player.getWeight());
-			player.setBirth(player.getBirth());
+			player.setSurname(playerRequest.getSurname());
+			player.setPosition(playerRequest.getPosition());
+			player.setHeight(playerRequest.getHeight());
+			player.setWeight(playerRequest.getWeight());
+			player.setBirth(playerRequest.getBirth());
+			player.setNationality(playerRequest.getNationality());
+			player.setPictureLink(playerRequest.getPictureLink());
 			return playerRepo.save(player);
 		}).orElseThrow(() -> new ResourceNotFoundException("Player", "id", playerRequest));
 	}
@@ -112,6 +114,11 @@ public class PlayerController {
 	public Page<PlayerModel> getPlayersByTeam(@PathVariable(value="teamId") TeamModel teamId, Pageable pageable){
 		return playerRepo.findByTeamId(teamId, pageable);
 		
+	}
+	
+	@GetMapping("/player")
+	public List<PlayerModel> getAllPlayers(){
+		return playerRepo.findAll();
 	}
 	
 	

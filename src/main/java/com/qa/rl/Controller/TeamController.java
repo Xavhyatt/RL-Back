@@ -67,7 +67,7 @@ public class TeamController {
 	@GetMapping("/findbyteamname/{name}")
 	public List<TeamModel> getTeamsByName(@PathVariable(value="name") String name, Pageable pageable){
 		List<TeamModel> team = teamRepo.findAll();
-		
+		//This needs Logic to handle spaces
 		team = team.stream().filter(t -> {
 			if(t.getName().toLowerCase().startsWith(name.toLowerCase())) { 
 				return true;

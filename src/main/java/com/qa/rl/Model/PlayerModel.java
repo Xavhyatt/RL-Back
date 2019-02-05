@@ -56,6 +56,11 @@ public class PlayerModel implements Serializable {
 	@NotNull
 	private Date birth;
 	
+	@NotBlank
+	private String nationality;
+	
+	private String pictureLink;
+	
 	
 
 	public PlayerModel() {
@@ -63,7 +68,7 @@ public class PlayerModel implements Serializable {
 	}
 
 	public PlayerModel(TeamModel teamModel, String name, String surname, String position,
-			int height, int weight, Date birth) {
+			int height, int weight, Date birth, String nationality, String pictureLink) {
 		this.teamId = teamModel;
 		this.name = name;
 		this.surname = surname;
@@ -71,6 +76,8 @@ public class PlayerModel implements Serializable {
 		this.height = height;
 		this.weight = weight;
 		this.birth = birth;
+		this.nationality = nationality;
+		this.pictureLink = pictureLink;
 
 	}
 
@@ -136,6 +143,22 @@ public class PlayerModel implements Serializable {
 
 	public void setBirth(Date birth) {
 		this.birth = birth;
+	}
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public String getPictureLink() {
+		return pictureLink;
+	}
+
+	public void setPictureLink(String pictureLink) {
+		this.pictureLink = pictureLink;
 	}
 	
 	

@@ -1,7 +1,6 @@
 package com.qa.rl.Model;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -13,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.sql.rowset.serial.SerialBlob;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.OnDelete;
@@ -45,6 +43,9 @@ public class TeamModel implements Serializable {
 	
 	@NotBlank
 	private String founded;
+	
+	@Lob
+	private String logoLink;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "leagueId", nullable = false)
@@ -56,15 +57,15 @@ public class TeamModel implements Serializable {
 
 	}
 
-	public TeamModel(Long teamId, @NotBlank String name, @NotBlank String location, @NotBlank String groundName,
-			@NotBlank String colours, @NotBlank String founded, LeagueModel leagueId) {
+	public TeamModel( @NotBlank String name, @NotBlank String location, @NotBlank String groundName,
+			@NotBlank String colours, @NotBlank String founded,String logoLink, LeagueModel leagueId) {
 
-		this.teamId = teamId;
 		this.name = name;
 		this.location = location;
 		this.groundName = groundName;
 		this.colours = colours;
 		this.founded = founded;
+		this.logoLink = logoLink;
 		this.leagueId = leagueId;
 	}
 
@@ -114,6 +115,14 @@ public class TeamModel implements Serializable {
 
 	public void setFounded(String founded) {
 		this.founded = founded;
+	}
+	
+	public String getLogoLink() {
+		return logoLink;
+	}
+
+	public void setLogoLink(String logoLink) {
+		this.logoLink = logoLink;
 	}
 
 	public LeagueModel getLeagueId() {

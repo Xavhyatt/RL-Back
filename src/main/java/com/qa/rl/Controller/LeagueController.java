@@ -53,9 +53,10 @@ public class LeagueController {
 			LeagueModel leagueDetails) {
 		LeagueModel lM = leagueRepo.findById(leagueId)
 				.orElseThrow(() -> new ResourceNotFoundException("League","id",leagueId));
-		
+	
 		lM.setName(leagueDetails.getName());
 		lM.setCountry(leagueDetails.getCountry());
+
 		
 		LeagueModel leagueData = leagueRepo.save(lM);
 		return leagueData;
