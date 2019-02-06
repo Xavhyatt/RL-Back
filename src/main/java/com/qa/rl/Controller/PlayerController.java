@@ -28,7 +28,7 @@ import com.qa.rl.Repositories.TeamRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class PlayerController {
 
 	@Autowired
@@ -53,7 +53,7 @@ public class PlayerController {
 	}
 	
 	// Method to Update team player is in
-	@PutMapping("team/{teamId}/player/{playerId}")
+	@PutMapping("/team/{teamId}/player/{playerId}")
 	public PlayerModel updatePlayerTeam(@PathVariable(value="teamId") Long teamId, 
 			@PathVariable(value="playerId") Long playerId) {
 		

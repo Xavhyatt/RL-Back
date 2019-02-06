@@ -33,7 +33,7 @@ public class PlayerRepositoryTest {
 	public void retrieveByIdTest() {
 		LeagueModel league = new LeagueModel("Super League", "England");
 		entityManager.persist(league);
-		TeamModel team = new TeamModel( "Leeds Rhinos", "Leeds", "Headingley Stadium", "Blue & Yellow", "1890", "Logo" , league );
+		TeamModel team = new TeamModel( "Leeds Rhinos", "Leeds", "Headingley Stadium", "Blue & Yellow", "1890", "Logo", "hello" , league );
 		entityManager.persist(team);
 		Date date = new Date("1990-09-10");
 		PlayerModel player = new PlayerModel(team, "Luke","Gale","Half Back", 180, 85, date ,"English","PicLink");

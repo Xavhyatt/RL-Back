@@ -46,6 +46,8 @@ public class TeamModel implements Serializable {
 	
 	@Lob
 	private String logoLink;
+	
+	private String website;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "leagueId", nullable = false)
@@ -58,7 +60,7 @@ public class TeamModel implements Serializable {
 	}
 
 	public TeamModel( @NotBlank String name, @NotBlank String location, @NotBlank String groundName,
-			@NotBlank String colours, @NotBlank String founded,String logoLink, LeagueModel leagueId) {
+			@NotBlank String colours, @NotBlank String founded,String logoLink, String website, LeagueModel leagueId) {
 
 		this.name = name;
 		this.location = location;
@@ -66,6 +68,7 @@ public class TeamModel implements Serializable {
 		this.colours = colours;
 		this.founded = founded;
 		this.logoLink = logoLink;
+		this.website = website;
 		this.leagueId = leagueId;
 	}
 
@@ -123,6 +126,14 @@ public class TeamModel implements Serializable {
 
 	public void setLogoLink(String logoLink) {
 		this.logoLink = logoLink;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
 	public LeagueModel getLeagueId() {

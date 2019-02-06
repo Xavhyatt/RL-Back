@@ -8,7 +8,9 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,18 +40,6 @@ public class TeamController {
 	@PostMapping("/league/{leagueId}/team")
 	public TeamModel createTeam(@PathVariable(value="leagueId") Long leagueId,
 			@Valid @RequestBody TeamModel teamModel) {
-		return leagueRepo.findById(leagueId).map(leagueModel -> {
-			teamModel.setLeagueId(leagueModel);
-			return teamRepo.save(teamModel);
-		}).orElseThrow(() -> new ResourceNotFoundException("League", "id", teamModel));
-	}
-	
-	//Method to update league team is in
-	@PutMapping("/league/{leagueId}/team/{teamId}")
-	public TeamModel updateTeamLeague(@PathVariable(value = "teamId") Long teamId,
-			@PathVariable(value="leagueId") Long leagueId) {
-		
-		TeamModel teamModel = teamRepo.findById(teamId).get();
 		return leagueRepo.findById(leagueId).map(leagueModel -> {
 			teamModel.setLeagueId(leagueModel);
 			return teamRepo.save(teamModel);
@@ -91,16 +81,31 @@ public class TeamController {
 	}
 	
 	//Edit Team Details
-	@PutMapping("/team/{teamId}")
-	public TeamModel updateTeam(@PathVariable(value="teamId") Long teamId, @Valid @RequestBody TeamModel teamrequest) {
+	@PutMapping("/league/{leagueId}/team/{teamId}")
+	public TeamModel updateTeam(@PathVariable(value="teamId") Long teamId, @PathVariable(value="leagueId") Long leagueId,
+			@Valid @RequestBody TeamModel teamrequest) {
+		
 		return teamRepo.findById(teamId).map(team -> {
 			team.setName(teamrequest.getName());
 			team.setLocation(team.getLocation());
 			team.setGroundName(team.getGroundName());
 			team.setColours(team.getColours());
 			team.setFounded(team.getFounded());
+			team.setLeagueId(leagueRepo.findById(leagueId).get());
+			
 			return teamRepo.save(team);
 		}).orElseThrow(() -> new ResourceNotFoundException("Team", "id", teamrequest));
 	}
+	
+	//Delete team
+	@DeleteMapping("/team/{teamId}")
+	public ResponseEntity<?> deleteTeam(@PathVariable(value="teamId") Long teamId){
+		TeamModel tM = teamRepo.findById(teamId)
+				.orElseThrow(() -> new ResourceNotFoundException("League", "id", teamId));
+		
+		teamRepo.delete(tM);
+		return ResponseEntity.ok().build();
+	}
+	
 }
 
