@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.qa.rl.RlWebsite1Application;
@@ -15,7 +16,8 @@ import com.qa.rl.Model.LeagueModel;
 import com.qa.rl.Repositories.LeagueRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { RlWebsite1Application.class})
+@ContextConfiguration(classes=RlWebsite1Application.class)
+//@SpringBootTest(classes = { RlWebsite1Application.class})
 @DataJpaTest
 public class LeagueRepositoryTest {
 	

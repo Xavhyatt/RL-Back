@@ -69,8 +69,10 @@ public class TeamController {
 	
 	//Get all teams in a League
 	@GetMapping("/league/{leagueId}/team")
-	public Page<TeamModel> gettAllTeamsByLeagueId(@PathVariable(value="leagueId") LeagueModel leagueId, Pageable pageable){
-		return teamRepo.findByLeagueId(leagueId, pageable);
+	public List<TeamModel> gettAllTeamsByLeagueId(@PathVariable(value="leagueId") LeagueModel leagueId, Pageable pageable){
+		Page<TeamModel> page =  teamRepo.findByLeagueId(leagueId, pageable);
+		 List<TeamModel> listTeam = page.getContent();
+		 return listTeam;
 		
 	}
 

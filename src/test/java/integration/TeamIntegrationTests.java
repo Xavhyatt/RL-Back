@@ -41,7 +41,7 @@ public class TeamIntegrationTests {
 	private LeagueRepository leagueRepo;
 	
 	LeagueModel league = new LeagueModel("Super League", "England");
-	TeamModel team = new TeamModel("Leeds Rhinos","Leeds", "Headingley Stadium" , "Blue & Yellow" , "1900" , "pic", league);
+	TeamModel team = new TeamModel("Leeds Rhinos","Leeds", "Headingley Stadium" , "Blue & Yellow" , "1900" , "pic","website", league);
 	
 	
 	@Before
@@ -65,7 +65,7 @@ public class TeamIntegrationTests {
 	{
 		leagueRepo.save(league);
 		teamRepo.save(team);
-		teamRepo.save(new TeamModel("St Helens","North", "Headingley Stadium" , "Blue & Yellow" , "1900" , "pic", league));
+		teamRepo.save(new TeamModel("St Helens","North", "Headingley Stadium" , "Blue & Yellow" , "1900" , "pic","website", league));
 		mvc.perform(get("/api/team").contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk()).andExpect(content()
 				.contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -79,7 +79,7 @@ public class TeamIntegrationTests {
 	{
 		leagueRepo.save(league);
 		teamRepo.save(team);
-		teamRepo.save(new TeamModel("St Helens","North", "Headingley Stadium" , "Blue & Yellow" , "1900" , "pic", league));
+		teamRepo.save(new TeamModel("St Helens","North", "Headingley Stadium" , "Blue & Yellow" , "1900" , "pic","website", league));
 		mvc.perform(get("/api/team/"+team.getTeamId()).contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk()).andExpect(content()
 				.contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -91,7 +91,7 @@ public class TeamIntegrationTests {
 	{
 		leagueRepo.save(league);
 		teamRepo.save(team);
-		teamRepo.save(new TeamModel("St Helens","North", "Headingley Stadium" , "Blue & Yellow" , "1900" , "pic", league));
+		teamRepo.save(new TeamModel("St Helens","North", "Headingley Stadium" , "Blue & Yellow" , "1900" , "pic","website", league));
 		mvc.perform(get("/api/findbyteamname/Leeds Rhinos").contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk()).andExpect(content()
 				.contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -103,7 +103,7 @@ public class TeamIntegrationTests {
 	{
 		leagueRepo.save(league);
 		teamRepo.save(team);
-		teamRepo.save(new TeamModel("St Helens","North", "Headingley Stadium" , "Blue & Yellow" , "1900" , "pic", league));
+		teamRepo.save(new TeamModel("St Helens","North", "Headingley Stadium" , "Blue & Yellow" , "1900" , "pic","website", league));
 		mvc.perform(get("/api/league/"+league.getLeagueId() + "/team").contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk()).andExpect(content()
 				.contentTypeCompatibleWith(MediaType.APPLICATION_JSON))

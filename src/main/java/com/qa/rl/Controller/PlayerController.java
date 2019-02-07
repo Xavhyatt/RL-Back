@@ -111,8 +111,11 @@ public class PlayerController {
 	}
 	
 	@GetMapping("/team/{teamId}/player")
-	public Page<PlayerModel> getPlayersByTeam(@PathVariable(value="teamId") TeamModel teamId, Pageable pageable){
-		return playerRepo.findByTeamId(teamId, pageable);
+	public List<PlayerModel> getPlayersByTeam(@PathVariable(value="teamId") TeamModel teamId, Pageable pageable){
+		Page<PlayerModel> player = playerRepo.findByTeamId(teamId, pageable); 
+		List<PlayerModel> listPlayer = player.getContent();
+		 return listPlayer;
+		
 		
 	}
 	
