@@ -25,7 +25,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "Player")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "creationDate", "lastModified" }, allowGetters = true)
 public class PlayerModel implements Serializable {
 
 	@Id
@@ -53,7 +52,7 @@ public class PlayerModel implements Serializable {
 	@NotNull
 	private int weight;
 	
-	@NotNull
+	
 	private Date birth;
 	
 	@NotBlank

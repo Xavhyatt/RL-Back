@@ -1,4 +1,4 @@
-package com.qa.rl.Controller;
+ package com.qa.rl.Controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,22 +52,22 @@ public class PlayerController {
 				
 	}
 	
-	// Method to Update team player is in
-	@PutMapping("/team/{teamId}/player/{playerId}")
-	public PlayerModel updatePlayerTeam(@PathVariable(value="teamId") Long teamId, 
-			@PathVariable(value="playerId") Long playerId) {
-		
-		PlayerModel playerModel = playerRepo.findById(playerId).get();
-		return teamRepo.findById(teamId).map(teamModel -> {
-			playerModel.setTeamId(teamModel);
-			return playerRepo.save(playerModel);
-		}).orElseThrow(() -> new ResourceNotFoundException("Team", "id", playerModel));
-	}
+//	// Method to Update team player is in
+//	@PutMapping("/team/{teamId}/player/{playerId}")
+//	public PlayerModel updatePlayerTeam(@PathVariable(value="teamId") Long teamId, 
+//			@PathVariable(value="playerId") Long playerId) {
+//		
+//		PlayerModel playerModel = playerRepo.findById(playerId).get();
+//		return teamRepo.findById(teamId).map(teamModel -> {
+//			playerModel.setTeamId(teamModel);
+//			return playerRepo.save(playerModel);
+//		}).orElseThrow(() -> new ResourceNotFoundException("Team", "id", playerModel));
+//	}
 	
-	// Method to Edit Player Profile
-	@PutMapping("/player/{playerId}")
-	public PlayerModel updatePlayer(@PathVariable(value="playerId") Long playerId, @Valid @RequestBody
-			PlayerModel playerRequest) {
+	// Method to Edit Player Profile 
+	@PutMapping("/team/{teamId}/player/{playerId}")
+	public PlayerModel updatePlayer(@PathVariable(value="playerId") Long playerId,
+			@PathVariable(value="teamId") Long teamId, @Valid @RequestBody PlayerModel playerRequest) {
 		return playerRepo.findById(playerId).map(player -> {
 			player.setName(playerRequest.getName());
 			player.setSurname(playerRequest.getSurname());
@@ -77,6 +77,8 @@ public class PlayerController {
 			player.setBirth(playerRequest.getBirth());
 			player.setNationality(playerRequest.getNationality());
 			player.setPictureLink(playerRequest.getPictureLink());
+			player.setTeamId(teamRepo.findById(teamId).get());
+			
 			return playerRepo.save(player);
 		}).orElseThrow(() -> new ResourceNotFoundException("Player", "id", playerRequest));
 	}

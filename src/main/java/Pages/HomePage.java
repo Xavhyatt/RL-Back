@@ -48,8 +48,10 @@ public class HomePage {
 		for (int i =0; i<20; i++) {
 			action.sendKeys(Keys.DOWN).perform();
 			}
-		String articleName = newsArticle1.getAttribute("href");
-		newsArticle1.click();
+		WebElement dynamicEl = (new WebDriverWait(driver, 10)
+				.until(ExpectedConditions.elementToBeClickable(newsArticle1)));
+		String articleName = dynamicEl.getAttribute("href");
+		dynamicEl.click();
 		return articleName;
 	}
 	

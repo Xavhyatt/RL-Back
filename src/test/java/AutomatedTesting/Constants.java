@@ -4,7 +4,7 @@ public class Constants {
 
 	private static final String reportFilepath = "C:\\Users\\Admin\\Desktop\\My Adv.Automated Test\\";
 	
-	private static final String reportFileName = "PetClinicTesting.html";
+	private static final String reportFileName = "RLWebsiteTesting.html";
 	
 	private static final String WEBSITEURL = "http://localhost:3000/";
 
